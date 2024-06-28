@@ -74,7 +74,7 @@ EXPOSE 80 443
 ARG COMPANY_NAME=onlyoffice
 ARG PRODUCT_NAME=documentserver
 ARG PRODUCT_EDITION=
-ARG PACKAGE_VERSION=7.3.3
+ARG PACKAGE_VERSION=
 ARG TARGETARCH
 ARG PACKAGE_BASEURL="http://download.onlyoffice.com/install/documentserver/linux"
 
