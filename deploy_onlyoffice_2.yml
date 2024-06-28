@@ -1,1 +1,22 @@
+- name: Deploy Onlyoffice. Pulling container
+  hosts: local
+  become: yes
+  remote_user: root
+
+  tasks:
+  - name: Pulling container
+    command: docker compose up -d
+    args:
+      chdir: /etc/Docker-DocumentServer
+  - name: Getting container id
+    command: docker ps -q -n 1
+    register: docker_cont_id
+  - name: Execute supervisorctl to start service
+    command: docker exec {{ docker_cont_id.stdout }} sudo supervisorctl start ds:example
+  - name: Restarting docker
+    command: docker compose restart
+    args:
+      chdir: /etc/Docker-DocumentServer
+  - name: Executing container again
+    command: docker exec {{ docker_cont_id.stdout }} supervisorctl start ds:example
 
