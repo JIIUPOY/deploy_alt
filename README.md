@@ -74,16 +74,16 @@ Ensure ONLYOFFICE Document Server is accessible at the configured ports.
 The Dockerfile sets up the ONLYOFFICE Document Server with all required dependencies and configurations. Key sections include:
 - Installation of necessary packages and fonts.
 - Configuration of PostgreSQL, Redis, and RabbitMQ.
-     - Download and installation of ONLYOFFICE Document Server.
-     - Exposing necessary ports for HTTP and HTTPS.
+- Download and installation of ONLYOFFICE Document Server.
+- Exposing necessary ports for HTTP and HTTPS.
 
 
 ### docker-compose.yml
 
 The docker-compose.yml file defines the multi-container setup for ONLYOFFICE Document Server, including services for PostgreSQL and RabbitMQ. Key configurations include:
-     - Environment variables for database connection.
-     - Volume mappings for persistent data storage.
-     - Port mappings for external access.
+- Environment variables for database connection.
+- Volume mappings for persistent data storage.
+- Port mappings for external access.
 
 ### Ansible Playbooks
 
@@ -183,7 +183,7 @@ This playbook pulls the ONLYOFFICE Document Server container and starts the serv
 ## Ports
 
 The ONLYOFFICE Document Server is configured to use the following ports:
-     - 80: HTTP.
-     - 443: HTTPS.
+- 80: HTTP.
+- 443: HTTPS.
 
 By following these instructions, you can successfully automate the deployment of ONLYOFFICE Document Server, ensuring a consistent and reproducible setup.
