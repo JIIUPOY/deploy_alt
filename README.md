@@ -191,6 +191,7 @@ This playbook pulls the ONLYOFFICE Document Server container and starts the serv
 The ONLYOFFICE Document Server is configured to use the following ports:
 - 80: HTTP.
 - 443: HTTPS.
+
 If an error occurred during the execution of the second playbook, then run the following command manually, where docker_id - id of the running container.
 ```bash
 docker exec <docker_id> supervisorctl start ds:example
