@@ -48,7 +48,13 @@ sudo systemctl enable --now docker
 ```
 
 ### Build and Deploy ONLYOFFICE Document Server
-
+Before starting to work with docker, after installing the deploy package in /etc/ansible/hosts, you need to write the following lines, where all:vars is the user executing the commands, local is the IP address that will be managed.
+```bash
+[all:vars]
+ansible_user=root
+[local]
+10.0.2.15
+```
 **Build the Docker Image**:
 Navigate to the repository directory and build the Docker image:
 ```bash
@@ -185,5 +191,9 @@ This playbook pulls the ONLYOFFICE Document Server container and starts the serv
 The ONLYOFFICE Document Server is configured to use the following ports:
 - 80: HTTP.
 - 443: HTTPS.
+If an error occurred during the execution of the second playbook, then run the following command manually, where docker_id - id of the running container.
+```bash
+docker exec <docker_id> supervisorctl start ds:example
+```
 
 By following these instructions, you can successfully automate the deployment of ONLYOFFICE Document Server, ensuring a consistent and reproducible setup.
