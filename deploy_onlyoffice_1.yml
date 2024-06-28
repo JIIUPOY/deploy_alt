@@ -1,0 +1,60 @@
+- name: Deploy Onlyoffice. Pulling configurations
+  hosts: local
+  remote_user: root
+  tasks:
+  - name: Install Git
+    apt_rpm:
+      name: git
+      state: present
+  - name: Clone official Onlyoffice repository
+    git:
+      repo: 'https://github.com/ONLYOFFICE/Docker-DocumentServer.git'
+      dest: /etc/Docker-DocumentServer
+      version: 'v7.3.3.60'
+  - name: Install Docker Compose
+    apt_rpm:
+      name: docker-compose-v2
+      state: present
+  - name: Install Docker Engine
+    apt_rpm:
+      name: docker-engine
+      state: present
+  - name: Enable Docker
+    systemd:
+      name: docker
+      enabled: yes
+  - name: Set Docker version
+    lineinfile:
+      path: /etc/Docker-DocumentServer/Dockerfile
+      regexp: '^ARG PACKAGE_VERSION='
+      line: 'ARG PACKAGE_VERSION=7.3.3'
+      state: present
+  - name: Add nameservers
+    lineinfile:
+      path: /etc/resolv.conf
+      line: "{{ item }}"
+      state: present
+    with_items:
+      - 'nameserver 8.8.8.8'
+      - 'nameserver 8.8.8.4'
+  - name: Uncomment JWT_ENABLED line
+    replace:
+      path: /etc/Docker-DocumentServer/docker-compose.yml
+      regexp: '#- JWT_ENABLED=true'
+      replace: '- JWT_ENABLED=true'
+
+  - name: Uncomment JWT_SECRET line
+    replace:
+      path: /etc/Docker-DocumentServer/docker-compose.yml
+      regexp: '#- JWT_SECRET=secret'
+      replace: '- JWT_SECRET=secret'
+
+  - name: Change ports for Onlyoffice
+    replace:
+      path: /etc/Docker-DocumentServer/docker-compose.yml
+      regexp: '80:80'
+      replace: '8081:80'
+  - replace:
+      path: /etc/Docker-DocumentServer/docker-compose.yml
+      regexp: '443:443'
+      replace: '4443:443'
