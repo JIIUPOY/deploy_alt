@@ -72,8 +72,8 @@ Ensure ONLYOFFICE Document Server is accessible at the configured ports.
 ### Dockerfile
 
 The Dockerfile sets up the ONLYOFFICE Document Server with all required dependencies and configurations. Key sections include:
-     - Installation of necessary packages and fonts.
-     - Configuration of PostgreSQL, Redis, and RabbitMQ.
+- Installation of necessary packages and fonts.
+- Configuration of PostgreSQL, Redis, and RabbitMQ.
      - Download and installation of ONLYOFFICE Document Server.
      - Exposing necessary ports for HTTP and HTTPS.
 
